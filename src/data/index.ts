@@ -1,6 +1,7 @@
 
+import { Product } from "../redux/types"
 
-export const items = [
+export const items: Product[] = [
 
     { id: 1, nombre: 'Mesa PetMascota', imagen: 'https://w7.pngwing.com/pngs/699/663/png-transparent-american-pit-bull-terrier-dog-collar-pet-shop-accessory-miscellaneous-leather-pet-thumbnail.png',price: 20.5 },
     { id: 2, nombre: 'Cortadora Pet', imagen: 'https://promart.vteximg.com.br/arquivos/ids/5979937-1000-1000/image-b90f723df6f845a2ba4daf6e9a727dad.jpg?v=637931841477370000',price: 20.5 },

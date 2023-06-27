@@ -5,8 +5,9 @@ import style from "./PetShop.module.css"
 import Paginado from "../../components/Paginado/Paginado";
 
 
-const PetShop: React.FC = () => {
 
+const PetShop: React.FC = () => {
+  
 
    const [pagina,setPagina] = useState<number>(1);
    const [porPagina] = useState<number>(9);
@@ -23,8 +24,7 @@ const PetShop: React.FC = () => {
   return (
 
     <div>
-      <h1 className={style.titulo}>Pets Shop</h1>
-
+      <h1 className={style.titulo}>Pets Shop</h1>   
       <div className={style.container}>
         <CardsShop firstIndex={firstIndex} lastIndex={lastIndex}  />
       </div>

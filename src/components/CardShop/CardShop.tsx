@@ -1,6 +1,8 @@
 import React from 'react'
 import style from './CardShop.module.css'
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { increment } from '../../redux/actions';
 
 
 interface Props {
@@ -14,6 +16,7 @@ interface Props {
 const cardShop: React.FC<Props> = ({ nombre, imagen, price }) => {
 
   const [contador, setContador] = useState(1);
+  const dispatch = useDispatch();
 
   const incrementar = () => {
     setContador(contador + 1);
@@ -35,7 +38,7 @@ const cardShop: React.FC<Props> = ({ nombre, imagen, price }) => {
           <button className={style.cant} onClick={decrementar}>-</button>
           </div>
           <span className={style.price}> S/. {price}</span>
-          <button className={style.agregar}>Agregar</button>
+          <button className={style.agregar} onClick={() => dispatch(increment())}>Agregar</button>
         
       </div>
     </div>

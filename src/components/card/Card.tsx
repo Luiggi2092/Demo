@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import {faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './petCards.css'
 import {Link} from "react-router-dom"
 import {DogsItems} from "../../data/indextb"
@@ -17,19 +17,19 @@ const Card: React.FC = () => {
         setCurrentSlide(index);
     };
 
-    const handleLike = () => {
-       //  setCurrentLikes((prevLikes) => prevLikes + 1);
-    };
+    // const handleLike = () => {
+    //    //  setCurrentLikes((prevLikes) => prevLikes + 1);
+    // };
 
-    const handleDetail = () => {
-        window.location.href = '/detail';
-    };
+    // const handleDetail = () => {
+    //     window.location.href = '/detail';
+    // };
 
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const value = event.currentTarget.value;
-        // Aquí puedes realizar cualquier acción que necesites con el valor
-        console.log(value);
-      };
+    // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     const value = event.currentTarget.value;
+    //     // Aquí puedes realizar cualquier acción que necesites con el valor
+    //     console.log(value);
+    //   };
     return (
         <div className="pet-card">
             <Carousel activeIndex={currentSlide} onSelect={handleSlideChange}>

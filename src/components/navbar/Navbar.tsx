@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
+import { useSelector,useDispatch } from 'react-redux';
+import {FillName} from '../../redux/actions'
 import './navbar.css'
-import {Link} from "react-router-dom"
+import {Link, Outlet} from "react-router-dom"
 
 const Navbar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const count = useSelector((state:any)=> state.count);
+  const dispatch = useDispatch();
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Search query:', searchQuery);
+    dispatch(FillName(searchQuery));
     // Agregar lógica para realizar la búsqueda de productos
   };
 
@@ -21,6 +25,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
+    <main>
     <nav className="navbar navbar-expand-lg navbar-dark ">
       <div className="container">
         <Link to="/" className="navbar-brand">
@@ -42,34 +47,34 @@ const Navbar: React.FC = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a href="/home" className="nav-link">
+                <Link to="/home" className="nav-link">
                   <BsHouseDoorFill /> Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/join" className="nav-link">
+                <Link to="/join" className="nav-link">
                   <BsPersonPlus /> Unete a nosotros
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/petmatch" className="nav-link">
+                <Link to="/petmatch" className="nav-link">
                   <BsHeartFill /> Petmatch
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/petshop" className="nav-link">
+                <Link to="/petshop" className="nav-link">
                   <BsBagFill /> PetShop
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/login" className="nav-link">
+                <Link to="/login" className="nav-link">
                   <BsBoxArrowInRight /> Inicio
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/register" className="nav-link">
+                <Link to="/register" className="nav-link">
                   <BsPersonPlus /> Registro
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="navbar-nav ms-auto">
@@ -92,6 +97,7 @@ const Navbar: React.FC = () => {
               <li className="nav-item">
                 <button className="btn btn-outline-light" onClick={handleCart}>
                   <BsCart3 />
+                  <span className='cart-count'>{count}</span>
                 </button>
               </li>
             </ul>
@@ -99,6 +105,8 @@ const Navbar: React.FC = () => {
         </Collapse>
       </div>
     </nav>
+    <Outlet/>
+    </main> 
   );
 };
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import './inicioSesion.css'
 
 const InicioSesion = () => {
