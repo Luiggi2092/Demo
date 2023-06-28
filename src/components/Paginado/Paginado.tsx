@@ -1,5 +1,6 @@
 import style from './paginado.module.css'
 import { useState} from "react"
+  
 
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
    setMinPageNumberLimit: (value:number)=> void; 
    maximo:number;
    porPagina:number;
+   maximoFiltro:number;
+   Fill:boolean;
 
 
 }
@@ -22,18 +25,37 @@ const Paginado: React.FC<Props> = ({pagina,
                                     setMaxpageNumberLimit,
                                     minPageNumberLimit,
                                     setMinPageNumberLimit,
-                                    porPagina
+                                    porPagina,
+                                    maximoFiltro,
+                                    Fill,
                                     }) => {
     
 
 const [pageNumberLimit] = useState(5);
 
-
 let pageNumbers=[];
+      
 
-for(let i=1;i<=maximo/porPagina;i++){
-    pageNumbers.push(i);
+
+
+
+
+
+if(Fill){
+    for(let i=1;i<=Math.ceil(maximoFiltro/porPagina);i++){
+        pageNumbers.push(i);
+    }
+}else{
+    for(let i=1;i<=maximo/porPagina;i++){
+        pageNumbers.push(i);
+    }
+    
 }
+
+console.log(Math.ceil(maximoFiltro/9));
+console.log(pageNumbers);
+
+
 
 const RendersPageItems = pageNumbers.map((number)=>{
           

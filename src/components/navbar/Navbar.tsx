@@ -7,15 +7,23 @@ import {FillName} from '../../redux/actions'
 import './navbar.css'
 import {Link, Outlet} from "react-router-dom"
 
-const Navbar: React.FC = () => {
+interface Props {
+  setPagina?: (value: number) => void;
+}
+
+
+const Navbar: React.FC<Props> = ({setPagina = () => {}}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const count = useSelector((state:any)=> state.count);
   const dispatch = useDispatch();
+  
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(FillName(searchQuery));
+    setPagina(1);
+    
     // Agregar lógica para realizar la búsqueda de productos
   };
 

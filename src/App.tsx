@@ -2,7 +2,6 @@ import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 import UneteANosotros from './pages/nosotros/UneteANosotros';
 import PetShop from './pages/tienda/PetShop';
@@ -18,7 +17,6 @@ const App: React.FC = () => {
 
     return (
         <HashRouter>
-            <Navbar />
             <SocialIcons />
             <Routes>
                 <Route path="/" element={<Landing />} />

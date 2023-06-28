@@ -26,3 +26,10 @@ export const FillName = (name:string)=>{
         payload: name
     }
 }
+
+export const NumPage = (page:number)=>{
+    return {
+        type: 'Page_Number',
+        payload: page
+    }
+} 

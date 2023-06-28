@@ -2,6 +2,7 @@ import { Product } from "./types";
 
 interface State {
     count : number;
+    numPage:number;
     products: Product[];
     name: string,
     Fill:boolean,
@@ -9,6 +10,7 @@ interface State {
 
 const initialState : State = {
     count :0,
+    numPage:1,
     products:[],
     name:"",
     Fill:false,
@@ -30,6 +32,7 @@ export const counterReducer = (state=initialState,action:any): State => {
         case 'GET_PRODUCTS':
             return {
                ...state,
+               Fill:false,
                products:action.payload 
             }
         case 'FILL_NAME':
@@ -38,6 +41,11 @@ export const counterReducer = (state=initialState,action:any): State => {
                Fill:true, 
                name:action.payload                
             }  
+        case 'Page':
+            return {
+                ...state,
+                numPage:action.payload
+            }    
          default :
            return state; 
     }
