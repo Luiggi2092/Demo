@@ -3,7 +3,7 @@ import { Collapse } from 'react-bootstrap';
 import { BsHouseDoorFill, BsPersonPlus, BsHeartFill, BsBagFill, BsBoxArrowInRight, BsSearch, BsCart3 } from 'react-icons/bs';
 import Logo from '../../assets/logo.png';
 import { useSelector,useDispatch } from 'react-redux';
-import {FillName} from '../../redux/actions'
+import {FillName,Fill,SetPagina} from '../../redux/actions'
 import './navbar.css'
 import {Link, Outlet} from "react-router-dom"
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-const Navbar: React.FC<Props> = ({setPagina = () => {}}) => {
+const Navbar: React.FC<Props> = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const count = useSelector((state:any)=> state.count);
@@ -21,8 +21,15 @@ const Navbar: React.FC<Props> = ({setPagina = () => {}}) => {
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if(searchQuery){
     dispatch(FillName(searchQuery));
-    setPagina(1);
+    dispatch(Fill(true));
+    dispatch(SetPagina(1));
+    
+    }else{
+      dispatch(Fill(false));
+    }
+
     
     // Agregar lógica para realizar la búsqueda de productos
   };

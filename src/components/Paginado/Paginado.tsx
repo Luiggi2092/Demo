@@ -1,59 +1,62 @@
 import style from './paginado.module.css'
 import { useState} from "react"
-  
+import { useDispatch } from 'react-redux';
+import {SetPagina} from "../../redux/actions"  
 
 
 interface Props {
    pagina:number;
-   setPagina: (value: number) => void;
    maxPageNumberLimit:number;
    setMaxpageNumberLimit: (value:number) => void;
    minPageNumberLimit:number;
    setMinPageNumberLimit: (value:number)=> void; 
-   maximo:number;
    porPagina:number;
-   maximoFiltro:number;
    Fill:boolean;
+   products : [],
+   productFill:[],
 
 
 }
 
 const Paginado: React.FC<Props> = ({pagina,
-                                    setPagina,
-                                    maximo,
                                     maxPageNumberLimit,
                                     setMaxpageNumberLimit,
                                     minPageNumberLimit,
                                     setMinPageNumberLimit,
                                     porPagina,
-                                    maximoFiltro,
                                     Fill,
+                                    products,
+                                    productFill
                                     }) => {
     
 
 const [pageNumberLimit] = useState(5);
+const dispatch = useDispatch();
 
 let pageNumbers=[];
       
 
 
 
-
+console.log(Math.ceil(products.length/porPagina));
 
 
 if(Fill){
-    for(let i=1;i<=Math.ceil(maximoFiltro/porPagina);i++){
+    for(let i=1;i<=Math.ceil(productFill.length/porPagina);i++){
         pageNumbers.push(i);
     }
 }else{
-    for(let i=1;i<=maximo/porPagina;i++){
+    for(let i=1;i<=Math.ceil(products.length/porPagina);i++){
         pageNumbers.push(i);
     }
     
 }
 
-console.log(Math.ceil(maximoFiltro/9));
-console.log(pageNumbers);
+console.log(Math.ceil(products.length/porPagina))
+console.log(Math.ceil(productFill.length/9));
+console.log(pageNumbers.length);
+console.log(pageNumbers)
+console.log("cuanto es"  + pagina)
 
 
 
@@ -61,7 +64,7 @@ const RendersPageItems = pageNumbers.map((number)=>{
           
     if(number < maxPageNumberLimit + 1 && number>minPageNumberLimit){        
      return (
-            <li key={number}  onClick={()=>setPagina(number)} className={pagina == number ? style.active: "null"}>
+            <li key={number}  onClick={()=>dispatch(SetPagina(number))} className={pagina == number ? style.active: "null"}>
             {number} 
             
             </li>
@@ -72,7 +75,7 @@ const RendersPageItems = pageNumbers.map((number)=>{
    
     const nextPage =()=> {
         if(pagina<pageNumbers.length){
-            setPagina(pagina + 1);
+            dispatch(SetPagina(pagina + 1));
         
 
        if(pagina + 1 > maxPageNumberLimit ){
@@ -85,7 +88,7 @@ const RendersPageItems = pageNumbers.map((number)=>{
     
     const previusPage =()=> {
         if(pagina > 1){
-            setPagina(pagina -1);
+            dispatch(SetPagina(pagina -1));
 
             if((pagina - 1)%pageNumberLimit===0){
                 setMaxpageNumberLimit(maxPageNumberLimit - pageNumberLimit);
@@ -98,7 +101,7 @@ const RendersPageItems = pageNumbers.map((number)=>{
         <div className={style.container}>
             <button disabled={pagina === 1 || pagina < 1 } onClick={previusPage}>Previus</button>
             {RendersPageItems}
-            <button disabled={pagina === Math.ceil(maximo/porPagina) || pagina > Math.ceil(maximo/porPagina) } onClick={nextPage}>Next</button>
+            <button  onClick={nextPage}>Next</button>
         </div>
     )
 

@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
-import {counterReducer} from './redux/reducer.ts'
+import store from '../src/redux/store.ts'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
+import axios from "axios"
 
-const store = createStore(counterReducer);
+axios.defaults.baseURL = "https://petmatchbeapi.up.railway.app/"
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>

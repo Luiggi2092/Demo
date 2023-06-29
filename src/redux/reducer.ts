@@ -1,53 +1,69 @@
-import { Product } from "./types";
+import { Product,TypeProduct } from "./types";
+import {GET_PRODNAME,INCREMENT,GET_PRODUCTS,FILL_NAME,FILL_PROD,PAGE_NUMBER,GET_TYPES_PRODUCTS} from "./actions"
+
 
 interface State {
     count : number;
     numPage:number;
     products: Product[];
+    productTypes:TypeProduct[];
+    productsxName: Product[];
     name: string,
-    Fill:boolean,
+    Fil:boolean
 }
 
 const initialState : State = {
     count :0,
     numPage:1,
     products:[],
+    productsxName:[],
+    productTypes:[],
     name:"",
-    Fill:false,
+    Fil:false,
 }
 
 
-export const counterReducer = (state=initialState,action:any): State => {
+ const counterReducer = (state=initialState,action:any): State => {
     switch(action.type){
-        case 'INCREMENT': 
+        case INCREMENT: 
          return {
               ...state,
               count: state.count + 1,
           };
-        case 'DECREMENT':
-          return {
-            ...state,
-            count: state.count -1,
-          }
-        case 'GET_PRODUCTS':
+        case GET_PRODUCTS:
             return {
                ...state,
-               Fill:false,
                products:action.payload 
             }
-        case 'FILL_NAME':
+        case FILL_NAME:
             return {
                 ...state,
-               Fill:true, 
                name:action.payload                
             }  
-        case 'Page':
+        case PAGE_NUMBER:
             return {
                 ...state,
                 numPage:action.payload
-            }    
+            }
+        case GET_PRODNAME:
+              return {
+                  ...state,
+                  productsxName:action.payload,
+              }
+        case FILL_PROD:
+            return {
+                ...state,
+                Fil:action.payload,
+            }
+        case GET_TYPES_PRODUCTS:
+            return {
+                ...state,
+                productTypes:action.payload,
+            }      
          default :
            return state; 
     }
 
 };
+
+export default counterReducer;

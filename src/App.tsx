@@ -11,6 +11,7 @@ import SocialIcons from './pages/socialIcons/SocialIcons';
 import Landing from './pages/Landing/Landing'
 import PetDetail from './pages/detail/detail'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/navbar/Navbar';
 
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
     return (
         <HashRouter>
             <SocialIcons />
+            <Navbar/>
             <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/home" element={<Home />} />

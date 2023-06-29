@@ -2,7 +2,7 @@ import {DogsItems} from '../../data/indextb';
 import React from 'react';
 import styles from './detail.module.css'
 import { useParams,Link } from 'react-router-dom';
-import Navbar from "../../components/navbar/Navbar"
+
 
 
 
@@ -34,7 +34,6 @@ const PetDetail: React.FC = () => {
     return (
         <>
         
-        <Navbar />
         <div className={styles.detailContainer}>
             <div className={styles.nameImage}>
                 <img src={pet[0].image} alt={pet[0].name}/>

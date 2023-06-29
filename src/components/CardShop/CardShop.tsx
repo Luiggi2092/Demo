@@ -7,13 +7,13 @@ import { increment } from '../../redux/actions';
 
 interface Props {
   id: number;
-  nombre: string;
+  name: string;
   imagen: string;
   price : number;
 }
 
 
-const cardShop: React.FC<Props> = ({ nombre, imagen, price }) => {
+const cardShop: React.FC<Props> = ({ name, imagen, price }) => {
 
   const [contador, setContador] = useState(1);
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const cardShop: React.FC<Props> = ({ nombre, imagen, price }) => {
     <div>
       <div className={style.card}>
         <img src={imagen} alt="producto" />
-        <p>{nombre}</p>
+        <p>{name}</p>
         <div className={style.botones}>
           <button className={style.cant} onClick={incrementar}>+</button>
           <span className={style.cont}>{contador >= 1 ? contador : 1}</span>
