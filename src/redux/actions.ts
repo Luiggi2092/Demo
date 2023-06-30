@@ -1,5 +1,5 @@
-import {Product,TypeProduct} from './types'
-
+import {Product,TypeProduct} from '../interfaces/Products'
+import {Pet} from '../interfaces/Pets'
 
 export const INCREMENT = 'INCREMENT';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
@@ -8,7 +8,10 @@ export const FILL_PROD = 'FILL_PROD';
 export const FILL_NAME = 'FILL_NAME';
 export const PAGE_NUMBER = 'PAGE_NUMBER';
 export const GET_TYPES_PRODUCTS = 'GET_TYPES_PRODUCTS';
-
+export const GET_PETS = 'GET_PETS';
+export const FILL_ID = 'FILL_ID';
+export const GET_PETSID = 'GET_PETSID';
+export const GET_CAT = 'GET_CAT';
 
 
 export const increment = ()=>{
@@ -60,4 +63,28 @@ export const getTypesProducts = (typeProduct:TypeProduct[])=>{
         payload: typeProduct 
     }
 }
+
+export const getPets = (Pets:Pet[])=>{
+    return {
+         type: 'GET_PETS',
+         payload: Pets
+    }
+}
+
+export const getPetsid=(Pets:Pet[])=>{
+     return {
+        type: 'GET_PETSID',
+        payload:Pets
+     }
+
+}
+
+export const getProdType=(fill:string)=>{
+     return {
+         type: 'GET_CAT',
+         payload:fill
+     }
+}
+
+
 

@@ -5,6 +5,7 @@ export interface Product {
     price:number,
     available: number,
     averageRating:number,
+    TypeProduct:string
     
 
 }

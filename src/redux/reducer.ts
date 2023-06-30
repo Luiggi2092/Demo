@@ -1,5 +1,6 @@
-import { Product,TypeProduct } from "./types";
-import {GET_PRODNAME,INCREMENT,GET_PRODUCTS,FILL_NAME,FILL_PROD,PAGE_NUMBER,GET_TYPES_PRODUCTS} from "./actions"
+import { Product,TypeProduct } from "../interfaces/Products";
+import {Pet} from "../interfaces/Pets"
+import {GET_PRODNAME,INCREMENT,GET_PRODUCTS,FILL_NAME,FILL_PROD,PAGE_NUMBER,GET_TYPES_PRODUCTS,GET_PETS,GET_PETSID,GET_CAT} from "./actions"
 
 
 interface State {
@@ -9,7 +10,14 @@ interface State {
     productTypes:TypeProduct[];
     productsxName: Product[];
     name: string,
-    Fil:boolean
+    Fil:boolean,
+    Pets:Pet[],
+    PetsFill:Pet[],
+    
+    
+    
+
+
 }
 
 const initialState : State = {
@@ -20,6 +28,9 @@ const initialState : State = {
     productTypes:[],
     name:"",
     Fil:false,
+    Pets:[],
+    PetsFill:[],
+
 }
 
 
@@ -59,7 +70,28 @@ const initialState : State = {
             return {
                 ...state,
                 productTypes:action.payload,
+            }   
+        case GET_PETS:
+             return {
+                ...state,
+                Pets: action.payload
+             } 
+         case GET_PETSID:
+            return {
+                ...state,
+                PetsFill:action.payload
             }      
+         case GET_CAT:
+            const Cat = state.products.filter((e:any)=>
+            { for(let f in e.TypeProduct){
+                     if(e.TypeProduct[f]== action.payload){
+                         return e.TypeProduct;
+                     };
+            } }) 
+            return {
+                ...state,
+                productsxName: Cat
+            }   
          default :
            return state; 
     }

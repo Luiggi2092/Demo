@@ -1,7 +1,11 @@
-import {DogsItems} from '../../data/indextb';
+import {Pet} from '../../interfaces/Pets'
 import React from 'react';
+import {getPetsid} from '../../redux/actions'
+import {useDispatch,useSelector} from "react-redux"
+import {useEffect} from "react"
 import styles from './detail.module.css'
 import { useParams,Link } from 'react-router-dom';
+import { PetsService } from '../../services/PetsService';
 
 
 
@@ -11,23 +15,28 @@ const PetDetail: React.FC = () => {
 
 
     const {id} = useParams();
-
-    console.log(id);
-
-
-       const pet=[];
-       const petId= DogsItems.filter(e=> e.id === Number(id));     
-       pet.push({
-          id: petId[0].id,
-          image: petId[0].image,
-          name : petId[0].title,
-          age: petId[0].age,
-          sterilization:petId[0].sterilization,
-          type: petId[0].type.map(e=> e.type),
-          vaccines: petId[0].vaccines.map(e=> e.name)
-       });
+    const dispatch = useDispatch();
+    const Pe = useSelector((state:any)=>state.PetsFill);
+    
+    useEffect(()=> {
+        (async function(){
+            const petId= await PetsService.getPetsId(`${id}`);
+            dispatch(getPetsid(petId.data));
+        
+        })();      
+          
+    },[]) 
      
-   
+    const obj:Pet ={
+        id:Pe.id,
+        name:Pe.name,
+        age:Pe.age,
+        breed:Pe.breed,
+        sterilization:Pe.sterilization,
+        image:Pe.image
+
+    }
+     
 
 
 
@@ -36,25 +45,25 @@ const PetDetail: React.FC = () => {
         
         <div className={styles.detailContainer}>
             <div className={styles.nameImage}>
-                <img src={pet[0].image} alt={pet[0].name}/>
-                <div className={styles.nameContainer}>
-                    <h1>{pet[0].name}</h1>
-                </div>
+                
+                {<><img src={obj.image} alt={obj.name} /><div className={styles.nameContainer}>
+                        <h1>{obj.name}</h1>
+                    </div></> }
             </div>
             <div className={styles.infoContainer}>
                 <div className={styles.info}>
-                    <p> Edad: {pet[0].age}</p>
-                    <p>Esterelización: {petId[0].sterilization ? 'Si' : 'No'}</p>
+                     <p> Edad: {obj.age}</p>
+                    <p>Esterelización: {obj.sterilization ? 'Si' : 'No'}</p>
                     
                         <div>
                             <h3>Especie:</h3>
-                            <p>{pet[0].type}</p>
+                            { <p>{obj.breed}</p> }
                         </div>
                     
-                        <div>
+                        {/* <div>
                             <h3>Vacunado:</h3>
-                            <p>{pet[0].vaccines}</p>
-                        </div>
+                            <p>{pet[0].vaccines}</p> }
+    </div> */}
                 </div>
                 <div className={styles.btns}>
                     <button>Donativo</button>

@@ -11,7 +11,7 @@ interface Props {
    minPageNumberLimit:number;
    setMinPageNumberLimit: (value:number)=> void; 
    porPagina:number;
-   Fill:boolean;
+   Fil:boolean;
    products : [],
    productFill:[],
 
@@ -24,7 +24,7 @@ const Paginado: React.FC<Props> = ({pagina,
                                     minPageNumberLimit,
                                     setMinPageNumberLimit,
                                     porPagina,
-                                    Fill,
+                                    Fil,
                                     products,
                                     productFill
                                     }) => {
@@ -41,7 +41,7 @@ let pageNumbers=[];
 console.log(Math.ceil(products.length/porPagina));
 
 
-if(Fill){
+if(Fil){
     for(let i=1;i<=Math.ceil(productFill.length/porPagina);i++){
         pageNumbers.push(i);
     }

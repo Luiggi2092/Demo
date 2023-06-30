@@ -8,8 +8,8 @@ import style from './Landing.module.css'
 const Landing = () => {
     const navigate = useNavigate();
     const clickHandler = () => {
-        navigate("/home")
-    }
+         navigate("/home")
+     }
 
     const [mostrarDescripcion1, setMostrarDescripcion1] = useState(false)
     const [mostrarDescripcion2, setMostrarDescripcion2] = useState(false)
